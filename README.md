@@ -1,20 +1,16 @@
 # Grand Theft Auto V Private Server With Docker
 
-## FX Server version: 2445 [Download latest](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/)
-
-### Information
-
-This repo allows the setup of a FiveM GTAV server using `docker-compose` .
+## FX Server version: 2445 ([Download Latest](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/))
 
 >Note: If server version is updated, change version in this README and `fivem_server/fx_server_version`
 
+## Information
+
+This repo allows the setup of a FiveM GTAV server using `docker-compose` .
+
 See [official server setup guide](https://docs.fivem.net/docs/server-manual/setting-up-a-server/#linux) for more information on what's going on in the background
 
-### Scripts
-
-Scripts that are to be added to the server should have their git repos intialized as a submodule in the `local_resources` folder. This ensures the latest updates to the scripts can be pulled easily.
-
-### Links
+## Links
 
 Links to scripts are below:
 
@@ -27,14 +23,56 @@ Links to scripts are below:
   * [esx_vehicleshop](https://github.com/ESX-Org/esx_vehicleshop)
   * [esx_weaponshop](https://github.com/ESX-Org/esx_weaponshop)
 
-### Usage
+---
+
+## First Start Usage
+
+Follow these steps when starting the server for the first time.
 
 Run `python generate_env_file.py` to generate default SQL information
 
 Configure server by editing `fivem_server/server.cfg` before running the following commands
+>:information_source: Note: Make sure to replace the username/password/database in the db connect string
 
-Initialize the database using the following command:
+Run `$ docker-compose up -d --build` to start up the server
 
-`docker exec -it gta5_server_fivem_db_1 mysql -ufivem -pTOL0F2ezGExXpdKMBh4G -e "$(cat fivem_server/database_files/es_extended_db.sql)"`
+Wait a minute and initialize the database using the following command:
 
-Finally, run `docker-compose up -d --build` to start up the server
+`$ docker exec -it gta5_server_fivem_db_1 mysql -ufivem -pTOL0F2ezGExXpdKMBh4G -e "$(cat fivem_server/database_files/es_extended_db.sql)"`
+
+Finally, restart the FiveM server container using `$ docker-compose restart fivem_server` so it can connect to the DB
+
+## Adding Scripts/Mods
+
+See [Script/Mod README](fivem_server/local_resources/README.md)
+
+---
+
+## Docker Notes
+
+The docker container for the MySQL DB is mounted on a volume and not bind mounted. This means when you stop/start/recreate the MySQL container, the SQL data is retained.
+>Note: See FAQ section for information on how to remove the volume
+
+## F.A.Q
+
+>:question: Q: I've messed up and need to start over, how do I do that?
+
+Run `$ docker-compose down --volumes` to tear down the stack. `--volumes` tells docker to also remove the mounted volumes.
+
+>:warning: Warning: Removing the volumes will cause you to lose all data! (This includes database data). Make sure to backup your database if you plan on removing the volumes
+
+>:question: Q: How do I backup my database?
+
+Run the following command:
+
+```bash
+$ docker exec gta5_server_fivem_db_1 sh -c 'exec mysqldump --all-databases -u[username] -p[mysql_password]' > /some/path/on/your/host/all-databases.sql
+```
+
+>:question: Q: Ok I've backed up my DB, now how do I restore that backup?
+
+Run the following command:
+
+```bash
+$ docker exec -i some-mysql sh -c 'exec mysql -u[username] -p[mysql_password]' < /some/path/on/your/host/all-databases.sql
+```

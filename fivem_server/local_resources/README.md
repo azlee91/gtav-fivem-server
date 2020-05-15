@@ -1,4 +1,4 @@
-# Purpose
+# Adding Scripts/Mods
 
 > NOTE: Make sure the directory structure is how you want it as everything will be copied as is to the \[local\] resource directory
 
