@@ -1,0 +1,1 @@
+docker exec -it gta5_server_fivem_db_1 mysql -ufivem -pTOL0F2ezGExXpdKMBh4G -e "$(cat fivem_server/database_files/es_extended_db.sql)"

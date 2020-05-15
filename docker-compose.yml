@@ -1,0 +1,36 @@
+version: '3'
+
+services:
+  fivem_db:
+    image: mysql
+    command: mysqld --default-authentication-plugin=mysql_native_password
+    restart: always
+    volumes: 
+      - fivem_db_data:/var/lib/mysql
+    env_file:
+      - env_file
+    networks:
+      - db_nw
+    ports:
+      - "3306:3306"
+  fivem_server:
+    build: ./fivem_server/.
+    command: "bash /gtaV_server/run_server.sh"
+    stdin_open: true
+    tty: true
+    restart: always
+    # volumes:
+    #   - gta_server_data:/gtaV_server
+    ports:
+      - "30120:30120/udp"
+      - "30120:30120/tcp"
+    networks:
+      - db_nw
+    depends_on:
+      - fivem_db
+networks:
+  db_nw:
+    driver: bridge
+volumes:
+#   gta_server_data:
+  fivem_db_data:
