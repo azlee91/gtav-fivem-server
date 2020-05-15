@@ -12,7 +12,7 @@ See [official server setup guide](https://docs.fivem.net/docs/server-manual/sett
 
 ## Links
 
-Links to scripts are below:
+The following scripts are included in this server:
 
 * [mysql-async](https://github.com/brouznouf/fivem-mysql-async)
 * [async](https://github.com/ESX-Org/async)
