@@ -2,7 +2,7 @@
 
 ## FX Server version: 2445 ([Download Latest](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/))
 
->Note: If server version is updated, change version in this README and `fivem_server/fx_server_version`
+>:information_source: Note: If server version is updated, change version in this README and `fivem_server/fx_server_version`
 
 ## Information
 
@@ -51,7 +51,7 @@ See [Script/Mod README](fivem_server/local_resources/README.md)
 ## Docker Notes
 
 The docker container for the MySQL DB is mounted on a volume and not bind mounted. This means when you stop/start/recreate the MySQL container, the SQL data is retained.
->Note: See FAQ section for information on how to remove the volume
+>:information_source: Note: See FAQ section for information on how to remove the volume
 
 ## F.A.Q
 
