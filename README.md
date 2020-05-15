@@ -42,7 +42,7 @@ Wait a minute and initialize the database using the following command:
 
 Finally, restart the FiveM server container using `$ docker-compose restart fivem_server` so it can connect to the DB
 
-That's it! :hooray: Start up the FiveM client and connect to the server!
+That's it! :tada: Start up the FiveM client and connect to the server!
 
 ## Adding Scripts/Mods
 
