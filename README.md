@@ -38,7 +38,9 @@ Run `$ docker-compose up -d --build` to start up the server
 
 Wait a minute and initialize the database using the following command:
 
-`$ docker exec -it gta5_server_fivem_db_1 mysql -ufivem -pTOL0F2ezGExXpdKMBh4G -e "$(cat fivem_server/database_files/es_extended_db.sql)"`
+```bash
+$ docker exec -it gta5_server_fivem_db_1 mysql -u[username] -p[mysql_password] -e "$(cat fivem_server/database_files/es_extended_db.sql)"
+```
 
 Finally, restart the FiveM server container using `$ docker-compose restart fivem_server` so it can connect to the DB
 
