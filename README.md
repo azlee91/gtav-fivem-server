@@ -50,7 +50,7 @@ See [Script/Mod README](fivem_server/local_resources/README.md)
 
 ## Docker Notes
 
-The docker container for the MySQL DB is mounted on a volume and not bind mounted. This means when you stop/start/recreate the MySQL container, the SQL data is retained.
+The docker container for the MySQL DB is mounted on a volume and not bind mounted. This means that the data is stored in an internal volume in docker. When you stop/start/recreate the MySQL container, the SQL data is retained.
 >:information_source: Note: See FAQ section for information on how to remove the volume
 
 ## F.A.Q
