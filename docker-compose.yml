@@ -5,6 +5,7 @@ services:
     image: mysql
     command: mysqld --default-authentication-plugin=mysql_native_password
     restart: always
+    container_name: fivem_db_container
     volumes: 
       - fivem_db_data:/var/lib/mysql
     env_file:
@@ -16,6 +17,7 @@ services:
   fivem_server:
     build: ./fivem_server/.
     command: "bash /gtaV_server/run_server.sh"
+    container_name: fivem_server_container
     stdin_open: true
     tty: true
     restart: always

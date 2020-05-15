@@ -29,17 +29,18 @@ The following scripts are included in this server:
 
 Follow these steps when starting the server for the first time.
 
-Run `python generate_env_file.py` to generate default SQL information
+Run `$ python3 generate_env_file.py` to generate default SQL information\
+_After running, this will generate an `env_file` containing your DB username and password_
 
 Configure server by editing `fivem_server/server.cfg` before running the following commands
->:information_source: Note: Make sure to replace the username/password/database in the db connect string
+>:information_source: Note: Make sure to replace the username/password/database in the db connect string with values generated from the script above
 
 Run `$ docker-compose up -d --build` to start up the server
 
 Wait a minute and initialize the database using the following command:
 
 ```bash
-$ docker exec -it gta5_server_fivem_db_1 mysql -u[username] -p[mysql_password] -e "$(cat fivem_server/database_files/es_extended_db.sql)"
+$ docker exec -it fivem_db_container mysql -u[username] -p[mysql_password] -e "$(cat fivem_server/database_files/es_extended_db.sql)"
 ```
 
 Finally, restart the FiveM server container using `$ docker-compose restart fivem_server` so it can connect to the DB
@@ -49,6 +50,12 @@ That's it! :tada: Start up the FiveM client and connect to the server!
 ## Adding Scripts/Mods
 
 See [Script/Mod README](fivem_server/local_resources/README.md)
+
+Once scripts are added to the local_resources folder, rebuild and run the fivem docker container to load the new resources with the following command
+
+```bash
+$ docker-compose up --no-deps -d --build fivem_server
+```
 
 ---
 
@@ -70,7 +77,7 @@ Run `$ docker-compose down --volumes` to tear down the stack. `--volumes` tells 
 Run the following command:
 
 ```bash
-$ docker exec gta5_server_fivem_db_1 sh -c 'exec mysqldump --all-databases -u[username] -p[mysql_password]' > /some/path/on/your/host/all-databases.sql
+$ docker exec fivem_db_container sh -c 'exec mysqldump --all-databases -u[username] -p[mysql_password]' > /some/path/on/your/host/all-databases.sql
 ```
 
 >:question: Q: Ok I've backed up my DB, now how do I restore that backup?
@@ -78,5 +85,5 @@ $ docker exec gta5_server_fivem_db_1 sh -c 'exec mysqldump --all-databases -u[us
 Run the following command:
 
 ```bash
-$ docker exec -i some-mysql sh -c 'exec mysql -u[username] -p[mysql_password]' < /some/path/on/your/host/all-databases.sql
+$ docker exec -i fivem_db_container sh -c 'exec mysql -u[username] -p[mysql_password]' < /some/path/on/your/host/all-databases.sql
 ```

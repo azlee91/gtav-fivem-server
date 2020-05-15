@@ -13,6 +13,7 @@ WORKDIR /gtaV_server
 RUN tar xf fx.tar.xz \
     && chmod 777 run_server.sh \
     && mv server.cfg vendor/server-data \
+    && mkdir -p vendor/server-data/resources/\[local\] \
     && mv local_resources/* vendor/server-data/resources/\[local\]
 
 CMD  /gtaV_server/run_server.sh

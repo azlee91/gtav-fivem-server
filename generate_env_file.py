@@ -18,14 +18,16 @@ def main() -> None:
     """ Generates an env_file to be used with docker compose containers """
     mysql_root_password = generate_password()
     mysql_user = input(
-        "Enter a user to create for the MySQL db (default: fiveM_default): "
+        "Enter a user to create for the MySQL db (default: 'fiveM_default'): "
     )
     mysql_user_password = input("Enter a password (Leave blank to generate): ")
-    my_sql_db = input("Enter the DB name to create (*Required*): ")
+    mysql_db = input(
+        "Enter the DB name to create (Default: 'es_extended')"
+        " **Only change if you know what you're doing!**: "
+    )
 
-    if not my_sql_db:
-        print("You must specify a mysql DB to init")
-        exit(1)
+    if not mysql_db:
+        mysql_db = "es_extended"
 
     if not mysql_user:
         mysql_user = "fiveM_default"
@@ -34,13 +36,15 @@ def main() -> None:
         mysql_user_password = generate_password()
 
     env_string = f"""MYSQL_ROOT_PASSWORD={mysql_root_password}
-MYSQL_DATABASE={my_sql_db}
+MYSQL_DATABASE={mysql_db}
 MYSQL_USER={mysql_user}
 MYSQL_PASSWORD={mysql_user_password}
     """
 
     with open("env_file", "w") as out_file:
         out_file.write(env_string)
+
+    print("Env file generation complete and has been written to ./env_file")
 
 
 if __name__ == "__main__":
