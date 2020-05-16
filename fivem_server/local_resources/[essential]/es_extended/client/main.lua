@@ -40,7 +40,7 @@ AddEventHandler('esx:playerLoaded', function(playerData)
 
 	-- disable wanted level
 	ClearPlayerWantedLevel(PlayerId())
-	SetMaxWantedLevel(0)
+	-- SetMaxWantedLevel(0)
 
 	if Config.EnableHud then
 		for k,v in ipairs(playerData.accounts) do
