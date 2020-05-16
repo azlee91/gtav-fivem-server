@@ -1,12 +1,12 @@
 # Grand Theft Auto V Private Server With Docker
 
-## FX Server version: 2445 ([Download Latest](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/))
+## FX Server version: 2468 ([Download Latest](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/))
 
 >:information_source: Note: If server version is updated, change version in this README and `fivem_server/fx_server_version`
 
 ## Information
 
-This repo allows the setup of a FiveM GTAV server using `docker-compose` .
+This repo allows the setup of a FiveM GTAV server using `docker-compose`.
 
 See [official server setup guide](https://docs.fivem.net/docs/server-manual/setting-up-a-server/#linux) for more information on what's going on in the background
 
