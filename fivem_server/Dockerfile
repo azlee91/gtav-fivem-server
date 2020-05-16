@@ -3,7 +3,7 @@ FROM ubuntu:latest
 EXPOSE 30120
 
 RUN apt update \
-    && apt upgrade \
+    && apt upgrade -y \
     && apt install -y xz-utils vim
 
 ADD . /gtaV_server
