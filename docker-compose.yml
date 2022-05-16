@@ -5,11 +5,10 @@ services:
     build: ./fivem_server/.
     user: 1000:1000
     command: "bash /home/fivem/gtaV_server/run_server.sh"
-    # command: "tail -f /dev/null"
     container_name: fivem_server_container
     # stdin_open: true
     tty: true
-    # restart: unless-stopped
+    restart: unless-stopped
     # volumes:
     #   - ./fivem_server/vendor/server-data:/usr/local/gtaV_server/server-data
     ports:
