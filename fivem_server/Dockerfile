@@ -2,18 +2,23 @@ FROM ubuntu:latest
 
 EXPOSE 30120
 
+RUN useradd -u 1000 fivem
+
 RUN apt update \
     && apt upgrade -y \
     && apt install -y xz-utils vim
 
-ADD . /gtaV_server
+
+ADD . /home/fivem/gtaV_server
+WORKDIR /home/fivem/gtaV_server
+RUN chown -R 1000:1000 /home/fivem
+USER 1000
 
 # Extract server files
-WORKDIR /gtaV_server
-RUN tar xf fx.tar.xz \
+RUN tar xvf fx.tar.xz \
     && chmod 777 run_server.sh \
     && mv server.cfg vendor/server-data \
     && mkdir -p vendor/server-data/resources/\[local\] \
     && mv local_resources/* vendor/server-data/resources/\[local\]
 
-CMD  /gtaV_server/run_server.sh
+CMD  /home/fivem/gtaV_server/run_server.sh

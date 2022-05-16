@@ -39,6 +39,8 @@ def main() -> None:
 MYSQL_DATABASE={mysql_db}
 MYSQL_USER={mysql_user}
 MYSQL_PASSWORD={mysql_user_password}
+UID=$(id -u)
+GID=$(id -g)
 """
 
     with open("env_file", "w") as out_file:
